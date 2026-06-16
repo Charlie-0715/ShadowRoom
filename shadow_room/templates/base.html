@@ -11,10 +11,11 @@
         暗影室 | Shadow Room
       {% endblock %}| 暗影室 | Shadow Room
     </title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    {% comment %} <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" /> {% endcomment %}
+    {% comment %} {% component_css_providers %} {# 这一行极其关键，用来输出所有加载组件的 CSS #} {% endcomment %}
     {% block extra_head %}
 
     {% endblock %}

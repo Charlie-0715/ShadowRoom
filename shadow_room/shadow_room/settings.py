@@ -57,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
+        # 'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -67,6 +67,12 @@ TEMPLATES = [
             "builtins": [
                   "django_components.templatetags.component_tags",
               ],
+            # 👈 核心修改：显式配置 loaders 链
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+                'django_components.template_loader.Loader', # 👈 必须加上这一行
+            ],
         },
     },
 ]
