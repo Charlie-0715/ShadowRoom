@@ -1,42 +1,16 @@
 {% load static %}
-<!-- <link rel="stylesheet" href="{% static 'function_components/fc_navbar.css' %}" /> -->
 <nav class="navbar">
   {% component "bc_glass_panel" %}
   {% fill "content" %}
+
   {% component "bc_link" target_url="media_view:index" %}
   {% fill "content" %}
   <span class="brand-icon">&#9654;</span> 暗影室 | Shadow Room
   {% endfill %}
   {% endcomponent %}
 
+  {% component "bc_link_list" target_data=list_data %}{% endcomponent %}
 
-  {% component "bc_link_list" target_data=list_data %}
-  {% endcomponent %}
-  <!-- <ul class="nav-links">
-    <li>
-      <a href="{% url 'media_view:index' %}" class="{% if active_nav == 'home' %}active{% endif %}">首页</a>
-    </li>
-    <li>
-      <a href="{% url 'media_view:movie_list' %}" class="{% if active_nav == 'movie' %}active{% endif %}">电影</a>
-    </li>
-    <li>
-      <a href="{% url 'media_view:tv_list' %}" class="{% if active_nav == 'tv' %}active{% endif %}">电视剧</a>
-    </li>
-    <li>
-      <a href="{% url 'media_view:animated_film_list' %}"
-        class="{% if active_nav == 'animated_film' %}active{% endif %}">剧场版</a>
-    </li>
-    <li>
-      <a href="{% url 'media_view:animation_list' %}" class="{% if active_nav == 'animation' %}active{% endif %}">动漫</a>
-    </li>
-    <li>
-      <a href="{% url 'media_view:documentary_list' %}"
-        class="{% if active_nav == 'documentary' %}active{% endif %}">纪录片</a>
-    </li>
-    <li>
-      <a href="{% url 'media_view:category_list' %}" class="{% if active_nav == 'category' %}active{% endif %}">分类</a>
-    </li>
-  </ul> -->
   {% comment %}
   {% if request.user.is_authenticated %}
   <a href="{% url 'media_view:user_profile' request.user.username %}"
@@ -45,7 +19,7 @@
   <a href="{% url 'media_view:login' %}" class="user-button {% if active_nav == 'login' %}active{% endif %}">登录</a>
   {% endif %}
   {% endcomment %}
-  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+
   {% endfill %}
   {% endcomponent %}
 </nav>
