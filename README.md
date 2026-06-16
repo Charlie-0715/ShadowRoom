@@ -1,5 +1,7 @@
 # ShadowRoom
 
+## 项目结构
+[项目结构](docs/PROJECT_STRUCTURE.md)
 
 ## 使用
 - 爬取豆瓣电影数据

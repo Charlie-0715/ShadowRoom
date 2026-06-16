@@ -1,0 +1,41 @@
+{% load static %}
+<!-- <link rel="stylesheet" href="{% static 'function_components/fc_navbar.css' %}" /> -->
+<nav class="navbar">
+  <div class="container nav-container">
+    <a href="{% url 'media_view:index' %}" class="nav-brand"><span class="brand-icon">&#9654;</span> 暗影室 | Shadow
+      Room</a>
+    <ul class="nav-links">
+      <li>
+        <a href="{% url 'media_view:index' %}" class="{% if active_nav == 'home' %}active{% endif %}">首页</a>
+      </li>
+      <li>
+        <a href="{% url 'media_view:movie_list' %}" class="{% if active_nav == 'movie' %}active{% endif %}">电影</a>
+      </li>
+      <li>
+        <a href="{% url 'media_view:tv_list' %}" class="{% if active_nav == 'tv' %}active{% endif %}">电视剧</a>
+      </li>
+      <li>
+        <a href="{% url 'media_view:animated_film_list' %}"
+          class="{% if active_nav == 'animated_film' %}active{% endif %}">剧场版</a>
+      </li>
+      <li>
+        <a href="{% url 'media_view:animation_list' %}"
+          class="{% if active_nav == 'animation' %}active{% endif %}">动漫</a>
+      </li>
+      <li>
+        <a href="{% url 'media_view:documentary_list' %}"
+          class="{% if active_nav == 'documentary' %}active{% endif %}">纪录片</a>
+      </li>
+      <li>
+        <a href="{% url 'media_view:category_list' %}" class="{% if active_nav == 'category' %}active{% endif %}">分类</a>
+      </li>
+    </ul>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'media_view:user_profile' request.user.username %}"
+      class="user-button {% if active_nav == 'user_profile' %}active{% endif %}">个人中心 ({{ request.user.username }})</a>
+    {% else %}
+    <a href="{% url 'media_view:login' %}" class="user-button {% if active_nav == 'login' %}active{% endif %}">登录</a>
+    {% endif %}
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>

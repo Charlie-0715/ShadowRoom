@@ -1,0 +1,45 @@
+{% load component_tags %}
+{% comment %} {% include 'media_view/components/fc_navbar/fc_navbar.html' %} {% endcomment %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        暗影室 | Shadow Room
+      {% endblock %}| 暗影室 | Shadow Room
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block extra_head %}
+
+    {% endblock %}
+  </head>
+
+  <body>
+    <div class="animated-bg">
+      <div class="blob blob1"></div>
+      <div class="blob blob2"></div>
+      <div class="blob blob3"></div>
+      <div class="blob blob4"></div>
+    </div>
+    <div class="wrapper">
+      {% component 'fc_navbar' %}
+      {% endcomponent %}
+      {% block content %}
+
+      {% endblock %}
+      <footer class="footer">
+        <div class="container">本站所有视频和图片均来自互联网收集而来，版权归原创者所有，本网站只提供web页面服务，并不提供资源存储，也不参与录制、上传. 若本站收录的节目无意侵犯了贵司版权，请发邮件至hifunny0817#gmail.com （#换成@）</div>
+      </footer>
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_scripts %}
+
+    {% endblock %}
+  </body>
+</html>
