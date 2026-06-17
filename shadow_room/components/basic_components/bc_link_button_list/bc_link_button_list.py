@@ -1,9 +1,9 @@
 from django_components import Component, register
 
-@register("bc_link_list")
-class BCLinkList(Component):
-    template_name = "bc_link_list.html"
-    # css_file = "bc_glass_panel.css"
+@register("bc_link_button_list")
+class BCLinkButtonList(Component):
+    template_name = "bc_link_button_list.html"
+    css_file = "bc_link_button_list.css"
 
     def get_context_data(self, target_data=None):
         return {

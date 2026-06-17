@@ -30,31 +30,6 @@ ALL_SORTS = ['名称', '上映时间', '片长']
 
 LIST_TYPE = {'movie': "电影", 'tv': "电视剧", 'animation': '动漫', 'animated_film': '剧场版', 'documentary': '纪录片', 'category': '分类'}
 
-
-# def get_genre_counts(type=None):
-#     qs = MediaModels.objects.all()
-#     if type:
-#         qs = qs.filter(type=type)
-#     genre_data = {}
-#     for media in qs:
-#         for g in media.genres.all():
-#             genre_data[g] = genre_data.get(g, 0) + 1
-#     result = []
-#     for g in ALL_GENRES:
-#         result.append({'name': g, 'count': genre_data.get(g, 0) or 0})
-#     return result
-
-# def get_genre_counts():
-#     result = []
-#     for g in ALL_GENRES:
-#         result.append({'name': g, 'count': Genre.objects.annotate(
-#             count=Count(g)
-#         )})
-
-# genre_counts = Genre.objects.annotate(
-#     count=Count("mediamodels", distinct=True)
-# )
-
 def media_detail(request, media_id):
     media = get_object_or_404(MediaModels, pk=media_id)
     return render(request, 'media_detail.html', {
@@ -93,7 +68,7 @@ def media_filter(request, media_type: str):
     paginator = Paginator(qs, 30)
     page_num = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_num)
-    media_list = f'media:{media_type}_list'
+    media_list = f'media_view:{media_type}_list'
     genre_counts = Genre.objects.annotate(
         count=Count(
             "mediamodels",
@@ -105,7 +80,7 @@ def media_filter(request, media_type: str):
     filters = {
         "sort": sort
     }
-    return render(request, 'media_list.html', {
+    return render(request, 'index.html', {
         'media_type': LIST_TYPE[media_type],
         'page_obj': page_obj,
         'genre_counts': genre_counts,
@@ -181,7 +156,7 @@ def category_list(request):
         "year": year,
         "sort": sort
     }
-    return render(request, 'category_list.html', {
+    return render(request, 'index.html', {
         'all_types': ALL_TYPES,
         'all_countries': ALL_COUNTRIES,
         'all_genres': ALL_GENRES,

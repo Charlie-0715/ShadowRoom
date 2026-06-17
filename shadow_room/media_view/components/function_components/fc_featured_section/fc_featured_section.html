@@ -1,0 +1,39 @@
+<section class="featured section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{{section_title}}</h2>
+      <a href="{% url 'media_view:movie_list' %}" class="section-more">浏览全部 &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {% for media in medias %}
+      <a href="{% url section_link media.id %}" class="card">
+        <div class="card-poster">
+          {% if media.poster_locate %}
+          <img src="{{ media.poster_locate.url }}" alt="{{ media.title }}" loading="lazy" />
+          {% else %}
+          <div class="card-poster-placeholder">暂无海报</div>
+          {% endif %}
+          <div class="card-rating-badge">
+            <span class="star">&#9733;</span> {{ media.douban_rating }}
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{ media.title }}</h3>
+            <div class="card-meta">
+              <span class="card-genres">
+                {% for g in media.genres.all %}
+                <span class="genre-pill">{{ g }}</span>
+                {% endfor %}
+              </span>
+            </div>
+            <p class="card-summary">{{ media.summary|truncatechars:60 }}</p>
+          </div>
+        </div>
+      </a>
+      {% empty %}
+      <div class="empty-state">
+        <p>暂无电影数据，敬请期待。</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

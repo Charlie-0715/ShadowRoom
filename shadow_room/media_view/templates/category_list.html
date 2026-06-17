@@ -1,94 +1,38 @@
-{% extends 'media/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% load query %}
 {% block title %}
-  {{media_type}}列表
+  {{ media_type }}列表
 {% endblock %}
 {% block content %}
   <section class="list-page section">
     <div class="container">
-
-      <div class="filter-panel">
-        <div class= "filter-group">
-          <span class="filter-label">类别：</span>
-          <a href="{% url_set type='全部' %}"
-            class="{% if filters.type == '全部'  or filters.type == '' %}active{% endif %}">
-              全部
-          </a>
-          {% for g in all_types %}
-            <a href="{% url_set type=g page=1 %}"
-              class="{% if filters.type == g %}active{% endif %}">
-                {{ g }}
-            </a>
-          {% endfor %}
-        </div>
-
-        <div class= "filter-group">
-          <span class="filter-label">国家/地区：</span>
-          <a href="{% url_set country='全部' %}"
-            class="{% if filters.country == '全部' or filters.country == ''  %}active{% endif %}">
-              全部
-          </a>
-          {% for g in all_countries %}
-            <a href="{% url_set country=g page=1 %}"
-              class="{% if filters.country == g %}active{% endif %}">
-                {{ g }}
-            </a>
-          {% endfor %}
-        </div>
-
-        <div class= "filter-group">
-          <span class="filter-label">类型：</span>
-          <a href="{% url_set genre='全部' %}"
-            class="{% if filters.genre == '全部'  or filters.genre == '' %}active{% endif %}">
-              全部
-          </a>
-          {% for g in all_genres %}
-            <a href="{% url_set genre=g page=1 %}"
-              class="{% if filters.genre == g %}active{% endif %}">
-                {{ g }}
-            </a>
-          {% endfor %}
-        </div>
-        
-        <div class= "filter-group">
-          <span class="filter-label">年份：</span>
-          <a href="{% url_set year='全部' %}"
-            class="{% if filters.year == '全部' or filters.year == ''  %}active{% endif %}">
-              全部
-          </a>
-          {% for g in all_years %}
-            <a href="{% url_set year=g page=1 %}"
-              class="{% if filters.year == g %}active{% endif %}">
-                {{ g }}
-            </a>
-          {% endfor %}
-        </div>
-      </div>
-
       <div class="list-main">
         <div class="list-header">
-          <h2 class="section-title">
-            {{media_type}}
-          </h2>
+          <h2 class="section-title">{{ media_type }}</h2>
           <ul class="sort-bar">
             <li class="{% if filters.sort == 'score' or filters.sort == '' %}active{% endif %}">
-                <a href="?sort=score">高分好评</a>
+              <a href="?sort=score">高分好评</a>
             </li>
-            
+
             <li class="{% if filters.sort == 'new' %}active{% endif %}">
-                <a href="?sort=new">最新</a>
+              <a href="?sort=new">最新</a>
             </li>
 
             <li class="{% if filters.sort == 'hot' %}active{% endif %}">
-                <a href="?sort=hot">最热</a>
+              <a href="?sort=hot">最热</a>
             </li>
-
           </ul>
-          <p class="list-summary">共 {% if media_total %}{{media_total}}{% else %}0{% endif %} 部</p>
+          <p class="list-summary">
+            共{% if media_total %}
+              {{ media_total }}
+            {% else %}
+              0
+            {% endif %}部
+          </p>
         </div>
         <div class="card-grid">
-            {% for media in page_obj %}
+          {% for media in page_obj %}
             <a href="{% url 'media:media_detail' media.id %}" class="card">
               <div class="card-poster">
                 {% if media.poster_locate %}
@@ -115,7 +59,7 @@
             </a>
           {% empty %}
             <div class="empty-state full">
-                <p>暂无{{media_type}}数据，敬请期待。</p>
+              <p>暂无{{ media_type }}数据，敬请期待。</p>
             </div>
           {% endfor %}
         </div>
@@ -125,11 +69,15 @@
               <a href="?page=1{% if current_genre %}
                   
                   
+                  
+                  
                   &genre={{ current_genre }}
                 {% endif %}"
                 class="page-link">
                 &laquo; 首页
               </a><a href="?page={{ page_obj.previous_page_number }}{% if current_genre %}
+                  
+                  
                                   
                   &genre={{ current_genre }}
                 {% endif %}"
@@ -145,6 +93,8 @@
                     {% if current_genre %}
                     
                     
+                    
+                    
                         &genre={{ current_genre }}
                   {% endif %}"
                   class="page-link">
@@ -155,6 +105,8 @@
             {% if page_obj.has_next %}
               <a href="?page={{ page_obj.next_page_number }}
                 {% if current_genre %}
+                  
+                  
                       
                   &genre={{ current_genre }}
                 {% endif %}"
@@ -162,6 +114,8 @@
                 下一页 &rsaquo;
               </a><a href="?page={{ page_obj.paginator.num_pages }}
                 {% if current_genre %}
+                  
+                  
                   
                   &genre={{ current_genre }}
                 {% endif %}"

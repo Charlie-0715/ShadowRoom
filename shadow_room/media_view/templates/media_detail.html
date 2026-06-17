@@ -1,4 +1,4 @@
-﻿{% extends 'media/base.html' %}
+﻿{% extends 'base.html' %}
 {% load static %}
 {% block title %}
   {{ media.title }}
@@ -13,7 +13,7 @@
         {% endif %}"
         class="detail-back">
         &larr;{% for key, value in list_type.items %}
-          {% if media.type == key %}{{value}}{% endif %}
+          {% if media.type == key %}{{ value }}{% endif %}
         {% endfor %}
       </a>
       <div class="detail-layout">
@@ -44,7 +44,7 @@
             {% if media.director %}
               <div class="detail-meta-item">
                 <span class="detail-meta-label">导演</span><span class="detail-meta-value">
-                  {% for data in media.director.all%}
+                  {% for data in media.director.all %}
                     <span>{{ data }}</span>
                   {% endfor %}
                 </span>

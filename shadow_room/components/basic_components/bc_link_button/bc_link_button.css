@@ -1,0 +1,21 @@
+.bc-link-button {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.bc-link-button:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.bc-link-button.active {
+  background: var(--accent-glow);
+  color: var(--accent);
+  font-weight: 600;
+}

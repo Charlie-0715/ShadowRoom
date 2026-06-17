@@ -1,0 +1,96 @@
+<div class="list-main">
+  <div class="list-header">
+    <h2 class="section-title">{% if current_genre %}{{ current_genre }}{% endif %}
+      {{media_type}}
+    </h2>
+    <ul class="sort-bar">
+      <li class="{% if filters.sort == 'score' or filters.sort == '' %}active{% endif %}">
+        <a href="?sort=score">高分好评</a>
+      </li>
+
+      <li class="{% if filters.sort == 'new' %}active{% endif %}">
+        <a href="?sort=new">最新</a>
+      </li>
+
+      <li class="{% if filters.sort == 'hot' %}active{% endif %}">
+        <a href="?sort=hot">最热</a>
+      </li>
+    </ul>
+    <p class="list-summary">共 {{ page_obj.paginator.count }} 部</p>
+  </div>
+  <div class="card-grid">
+    {% for media in page_obj %}
+    <a href="{% url 'media:media_detail' media.id %}" class="card">
+      <div class="card-poster">
+        {% if media.poster_locate %}
+        <img src="{{ media.poster_locate.url }}" alt="{{ media.title }}" loading="lazy" />
+        {% else %}
+        <div class="card-poster-placeholder">暂无海报</div>
+        {% endif %}
+        <div class="card-rating-badge">
+          <span class="star">&#9733;</span> {{ media.douban_rating }}
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">{{ media.title }}</h3>
+          <p class="card-directors">{{ media.directors }}</p>
+          <div class="card-meta">
+            <span class="card-genres">
+              {% for g in media.genres.all %}
+              <span class="genre-pill">{{ g }}</span>
+              {% endfor %}
+            </span>
+          </div>
+          <p class="card-summary">{{ media.summary|truncatechars:60 }}</p>
+        </div>
+      </div>
+    </a>
+    {% empty %}
+    <div class="empty-state full">
+      <p>暂无{{media_type}}数据，敬请期待。</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% if page_obj.paginator.num_pages > 1 %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+    <a href="?page=1{% if current_genre %}&genre={{ current_genre }}
+                {% endif %}" class="page-link">
+      &laquo; 首页
+    </a><a href="?page={{ page_obj.previous_page_number }}{% if current_genre %}
+                                  
+                  &genre={{ current_genre }}
+                {% endif %}" class="page-link">
+      &lsaquo; 上一页
+    </a>
+    {% endif %}
+    {% for num in page_obj.paginator.page_range %}
+    {% if num == page_obj.number %}
+    <span class="page-link active">{{ num }}</span>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}
+                    {% if current_genre %}
+                    
+                    
+                        &genre={{ current_genre }}
+                  {% endif %}" class="page-link">
+      {{ num }}
+      </a>
+      {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}
+                {% if current_genre %}
+                      
+                  &genre={{ current_genre }}
+                {% endif %}" class="page-link">
+        下一页 &rsaquo;
+      </a><a href="?page={{ page_obj.paginator.num_pages }}
+                {% if current_genre %}
+                  
+                  &genre={{ current_genre }}
+                {% endif %}" class="page-link">
+        末页 &raquo;
+      </a>
+      {% endif %}
+  </div>
+  {% endif %}
+</div>

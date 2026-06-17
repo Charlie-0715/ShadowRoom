@@ -3,102 +3,16 @@
 {% block title %}
   首页
 {% endblock %}
+
 {% block content %}
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="container hero-content">
-      <h1 class="hero-title">人生百态，光影交织</h1>
-      <p class="hero-subtitle">陌生人，停下来喝杯咖啡，看部电影，再继续把.....</p>
-    </div>
-  </section>
-  {% comment %} <section class="genre-cloud section">
-    <div class="container">
-      <h2 class="section-title">分类浏览</h2>
-      <div class="genre-tags">
-        {% for g in genre_counts %}
-          {% if g.count > 0 %}
-            <a href="{% url 'media_view:movie_list' %}?genre={{ g.name }}" class="genre-tag">{{ g.name }}</a>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-  </section> {% endcomment %}
-  <section class="featured section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">热门电影</h2>
-        <a href="{% url 'media_view:movie_list' %}" class="section-more">浏览全部 &rarr;</a>
-      </div>
-      <div class="card-grid">
-        {% for movie in movies %}
-          <a href="{% url 'media_view:media_detail' movie.id %}" class="card">
-            <div class="card-poster">
-              {% if movie.poster_locate %}
-                <img src="{{ movie.poster_locate.url }}" alt="{{ movie.title }}" loading="lazy" />
-              {% else %}
-                <div class="card-poster-placeholder">暂无海报</div>
-              {% endif %}
-              <div class="card-rating-badge">
-                <span class="star">&#9733;</span> {{ movie.douban_rating }}
-              </div>
-              <div class="card-body">
-                <h3 class="card-title">{{ movie.title }}</h3>
-                <div class="card-meta">
-                  <span class="card-genres">
-                    {% for g in movie.genres.all %}
-                      <span class="genre-pill">{{ g }}</span>
-                    {% endfor %}
-                  </span>
-                </div>
-                <p class="card-summary">{{ movie.summary|truncatechars:60 }}</p>
-              </div>
-            </div>
-          </a>
-        {% empty %}
-          <div class="empty-state">
-            <p>暂无电影数据，敬请期待。</p>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-  <section class="featured section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">热门电视剧</h2>
-        <a href="{% url 'media_view:tv_list' %}" class="section-more">浏览全部 &rarr;</a>
-      </div>
-      <div class="card-grid">
-        {% for tv in tv_shows %}
-          <a href="{% url 'media_view:media_detail' tv.id %}" class="card">
-            <div class="card-poster">
-              {% if tv.poster_locate %}
-                <img src="{{ tv.poster_locate.url }}" alt="{{ tv.title }}" loading="lazy" />
-              {% else %}
-                <div class="card-poster-placeholder">暂无海报</div>
-              {% endif %}
-              <div class="card-rating-badge">
-                <span class="star">&#9733;</span> {{ tv.douban_rating }}
-              </div>
-              <div class="card-body">
-                <h3 class="card-title">{{ tv.title }}</h3>
-                <div class="card-meta">
-                  <span class="card-genres">
-                    {% for g in tv.genres.all %}
-                      <span class="genre-pill">{{ g }}</span>
-                    {% endfor %}
-                  </span>
-                </div>
-                <p class="card-summary">{{ tv.summary|truncatechars:60 }}</p>
-              </div>
-            </div>
-          </a>
-        {% empty %}
-          <div class="empty-state">
-            <p>暂无电视剧数据，敬请期待。</p>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
+  {% if active_nav == 'home' %}
+    {% component 'pc_home' %}
+    {% endcomponent %}
+  {% elif active_nav == 'movie' or active_nav == 'tv' or active_nav == 'animation' or active_nav == 'animated_film' or active_nav == 'documentary' %}
+    {% component 'pc_media_list' %}
+    {% endcomponent %}
+  {% elif active_nav == 'category' %}
+    {% component 'pc_category_list' %}
+    {% endcomponent %}
+  {% endif %}
 {% endblock %}

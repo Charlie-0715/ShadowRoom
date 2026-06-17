@@ -3,13 +3,13 @@
   {% component "bc_glass_panel" %}
   {% fill "content" %}
 
-  {% component "bc_link" target_url="media_view:index" %}
+  {% component "bc_link_button" target_url="media_view:index" %}
   {% fill "content" %}
   <span class="brand-icon">&#9654;</span> 暗影室 | Shadow Room
   {% endfill %}
   {% endcomponent %}
 
-  {% component "bc_link_list" target_data=list_data %}{% endcomponent %}
+  {% component "bc_link_button_list" target_data=list_data %}{% endcomponent %}
 
   {% comment %}
   {% if request.user.is_authenticated %}

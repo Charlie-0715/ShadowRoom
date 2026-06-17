@@ -1,0 +1,11 @@
+<ul class="bc-link-button-list">
+  {% for url, active, text in target_data %}
+  <li>
+    {% component "bc_link_button" target_url=url target_active=active %}
+    {% fill "content" %}
+    {{text}}
+    {% endfill %}
+    {% endcomponent %}
+  </li>
+  {% endfor %}
+</ul>
