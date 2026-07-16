@@ -1,9 +1,0 @@
-.bc-link-button-list {
-  /* display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px; */
-  display: flex;
-  list-style: none;
-  gap: 4px;
-}
