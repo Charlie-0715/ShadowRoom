@@ -25,10 +25,10 @@ python .\manage.py runserver
 
 ## 项目需求
   1. 激活虚拟环境
-  > 当前开发环境为python 
-  > Python 3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)] on win32
+  > 当前开发环境为python: 
+    Python 3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)] on win32
   ``` shell
-  python -m venv /path/to/new/virtual/environment
+  python -m venv .env
   source .env/bin/activate  
   ```
   2. django
